@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS AntiCharaTable;
+
+CREATE TABLE AntiCharaTable (
+  id INT AUTO_INCREMENT  PRIMARY KEY,
+  chara_name VARCHAR(250) NOT NULL,
+  anti_chara_name VARCHAR(250) NOT NULL
+);
