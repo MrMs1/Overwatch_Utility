@@ -2,17 +2,16 @@ package overwatchutility.model;
 
 import org.springframework.stereotype.Component;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /*
  * アンチキャラ名返却用モデルクラス
  */
 @Component
-@Getter
-@Setter
-public class AntiCharactorInfo {
+@Data
+public class AntiCharaInfo {
 
+    private String charaName;
     private String antiCharaName;
 
 }
