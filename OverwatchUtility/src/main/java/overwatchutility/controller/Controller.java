@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import overwatchutility.business.AddAntiChara;
-import overwatchutility.business.AntiCharaSearch;
-import overwatchutility.model.AddCharaInfo;
+import overwatchutility.business.DeleteAntiCharaInfo;
+import overwatchutility.business.SearchAntiChara;
+import overwatchutility.business.UpdateAntiCharaInfo;
 import overwatchutility.model.AntiCharaInfo;
 
 @Slf4j
@@ -25,31 +26,31 @@ import overwatchutility.model.AntiCharaInfo;
 @RequestMapping("/api/v1/anticharainfo")
 public class Controller {
 
-    private final AntiCharaSearch antiCharaSearch;
+    private final SearchAntiChara antiCharaSearch;
     private final AddAntiChara addAntiChara;
+    private final UpdateAntiCharaInfo updateAntiCharaInfo;
+    private final DeleteAntiCharaInfo deleteAntiCharaInfo;
 
-    @GetMapping("/charaname/{targetCharaName}")
+    @GetMapping("/search/{targetCharaName}")
     public AntiCharaInfo searchAntiChara(@PathVariable String targetCharaName) {
-
         log.info("Target chara name is : {}", targetCharaName);
         return antiCharaSearch.search(targetCharaName);
-
     }
 
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public AntiCharaInfo createAntiCharaInfo(@RequestBody AddCharaInfo info) {
+    public AntiCharaInfo createAntiCharaInfo(@RequestBody AntiCharaInfo info) {
         return addAntiChara.add(info);
     }
 
-    @PutMapping("/edit")
-    public void updateAntiCharaInfo() {
-
+    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public AntiCharaInfo resetAntiCharaInfo(@RequestBody AntiCharaInfo info) {
+        return updateAntiCharaInfo.update(info);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping(value = "/delete", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAntiCharaInfo() {
-
+    public void deleteAntiCharaInfo(@RequestBody AntiCharaInfo info) {
+        deleteAntiCharaInfo.delete(info);
     }
 }

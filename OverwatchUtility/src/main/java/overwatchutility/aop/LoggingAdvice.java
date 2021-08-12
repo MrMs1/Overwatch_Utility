@@ -1,4 +1,4 @@
-package overwatchutility.log;
+package overwatchutility.aop;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
